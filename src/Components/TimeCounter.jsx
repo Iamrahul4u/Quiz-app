@@ -5,10 +5,11 @@ function TimeCounter() {
   const { secondsRemaining, dispatch } = useQuestions();
 
   useEffect(() => {
-    setInterval(() => {
+    const id = setInterval(() => {
       dispatch({ type: "time" });
     }, 1000);
-  }, []);
+    return () => clearInterval(id);
+  }, [dispatch]);
   return <div className="timer">{secondsRemaining}</div>;
 }
 
